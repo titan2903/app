@@ -3,16 +3,27 @@ import Vuex from 'vuex';
 
 Vue.use(Vuex);
 
-const store = new Vuex.Store({
-  state: {
+const defaultState = () => {
+  return {
     isIngame: false,
     victory: false,
     words: ['hello', 'my', 'name', 'is', 'padul'],
     input: [],
+    unameSockets: [], // mungkin nanti bisa ditaro di array ini buat username lebih (v-for di papan pembuktian?)
     textModel: '',
+    username: '',
     score: 0,
-  },
+  };
+};
+
+const state = defaultState();
+
+const store = new Vuex.Store({
+  state,
   mutations: {
+    RESET_STATE(state) {
+      Object.assign(state, defaultState());
+    },
     SET_INGAMESTATE(state, payload) {
       state.isIngame = payload;
     },
@@ -28,8 +39,17 @@ const store = new Vuex.Store({
     SET_SCORE(state, payload) {
       state.score = payload;
     },
+    SET_UNAME(state, payload) {
+      state.username = payload;
+    },
   },
   actions: {
+    resetState({ commit }) {
+      commit('RESET_STATE');
+    },
+    setUsername({ commit }, str) {
+      commit('SET_UNAME', str);
+    },
     inGameState({ commit }, bool) {
       commit('SET_INGAMESTATE', bool);
     },

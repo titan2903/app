@@ -1,8 +1,12 @@
 <template>
-  <router-link v-if="!showNav" to="/">Masuk</router-link>
-  <div v-else>
-    <router-link to="/play">Play</router-link> |
-    <a @click="logout">Change User</a>
+  <div>
+    <div v-if="!check">
+      <router-link to="/">Masuk</router-link>
+    </div>
+    <div v-else>
+      <router-link to="/play">[ Play ]</router-link> |
+      <a @click="logout">[ Change User ]</a>
+    </div>
   </div>
 </template>
 
@@ -11,26 +15,29 @@ export default {
   name: 'Navbar',
   data() {
     return {
-      showNav: false,
+      check: true,
     };
+  },
+  created() {
+    this.checkData();
   },
   methods: {
     logout() {
+      localStorage.clear();
+      this.check = false;
       this.$router.push('/');
-      this.$store.dispatch('inGameState', false);
+      this.$store.dispatch('resetState');
     },
-  },
-  computed: {
-    isIngame() {
-      return this.$store.state.isIngame;
-    },
-  },
-  watch: {
-    isIngame(newVal) {
-      if (newVal) {
-        this.showNav = true;
+    checkData() {
+      const state = this.$store.state.isIngame;
+      const uname = localStorage.getItem('uname');
+
+      if (state) {
+        this.check = true;
+      } else if (uname) {
+        this.check = true;
       } else {
-        this.showNav = false;
+        this.check = false;
       }
     },
   },

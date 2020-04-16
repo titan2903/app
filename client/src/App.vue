@@ -27,6 +27,7 @@ export default {
 
 #nav {
   padding: 30px;
+  text-align: left;
 }
 
 #nav a {

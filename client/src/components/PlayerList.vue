@@ -16,7 +16,7 @@
           </thead>
           <tbody>
             <tr>
-              <td>Padul</td>
+              <td>{{ uname }}</td>
               <td>
                 <i>
                   {{ getResult ? 'Done' : 'Ongoing Battle' }}
@@ -34,6 +34,14 @@
 <script>
 export default {
   name: 'PlayerList',
+  data() {
+    return {
+      uname: '',
+    };
+  },
+  created() {
+    this.getUsername();
+  },
   computed: {
     getScore() {
       return this.$store.state.score;
@@ -43,6 +51,11 @@ export default {
     },
     getTextModel() {
       return this.$store.state.textModel;
+    },
+  },
+  methods: {
+    getUsername() {
+      this.uname = localStorage.getItem('username');
     },
   },
 };
