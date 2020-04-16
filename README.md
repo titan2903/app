@@ -1,2 +1,5 @@
-# app
-The real lomba ketik
+# Lomba Ketik
+
+Bakal dokumentasi
+ 
+ > Jangan lupa bikin branch baru!!!
