@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import io from 'socket.io-client';
-const socket = io('http://localhost:3000');
 
 Vue.use(Vuex);
 
@@ -20,7 +19,8 @@ const defaultState = () => {
 };
 
 const state = defaultState();
-const uri = 'http://localhost:3000/getData';
+const uri = 'https://lomba-ketik.herokuapp.com/getData';
+const socket = io(uri);
 
 const store = new Vuex.Store({
   state,
