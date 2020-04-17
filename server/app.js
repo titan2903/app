@@ -1,34 +1,56 @@
-const express = require('express')
-const app = express()
-const port = process.env.PORT || 3000
-const router = require('./routers')
-const errorHandler = require('./middlewares/errorHandler')
-const cors = require('cors')
+const express = require('express');
+const app = express();
+const port = process.env.PORT || 3000;
+const router = require('./routers');
+const errorHandler = require('./middlewares/errorHandler');
+const cors = require('cors');
 const http = require('http').createServer(app);
 const io = require('socket.io')(http);
 
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cors());
+
+let users = []; //!ini di ini name dan score object
+
 io.on('connection', (socket) => {
+  console.log('an user connected');
 
-  socket.on('created', (message) => {
-    socket.broadcast.emit('created', message)
-  })
+  socket.on('emitUser', (user) => {
+    let player = {
+      name: user,
+      score: 0,
+    };
 
-  // socket.on('notifyAmountPlayer', (name) => {
-  //   socket.broadcast.emit('announce', name)
-  // })
+    users.push(player);
+    io.emit('pemain', users);
+  });
 
-  // socket.on('startGame', (obj) => {
-  //   io.local.emit('gameOn', obj)
-  // })
-})
+  socket.on('total_score', (score) => {
+    users.forEach((user) => {
+      if (user.name === score.name) {
+        user.score = score.score;
+      }
+    });
 
-app.use(cors())
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
+    io.emit('pemain', users);
+  });
 
-app.use(router)
-app.use(errorHandler)
+  socket.on('startGame', (words) => {
+    io.emit('created', words);
+    socket.broadcast.emit('created', 'socket broadcast');
+  });
+
+  socket.on('message', (data) => {
+    socket.broadcast.emit('message', data);
+  });
+});
+
+app.use(router);
+app.use(errorHandler);
 
 http.listen(port, () => {
-  console.log(`Server running on PORT : ${port} !!`)
-})
+  console.log(`Server running on PORT : ${port} !!`);
+});
+
