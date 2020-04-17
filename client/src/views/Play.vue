@@ -113,6 +113,7 @@ export default {
         if (this.timer < 0) {
           clearInterval(countdown);
           this.showStart = true;
+          this.battleDone = true;
           this.timer = 30;
         }
       }, 1000);
