@@ -133,4 +133,4 @@ http://localhost:3000/getData
     "Internal Server Error"
   }
 ```
->>>>>>> origin/Mohammad-Haidir
+
