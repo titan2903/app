@@ -36,6 +36,7 @@ export default {
           type: 'is-danger',
         });
       } else {
+        this.$store.dispatch('emitUser', uname);
         localStorage.setItem('username', uname);
         this.$router.push('/play');
         this.$store.dispatch('inGameState', true);

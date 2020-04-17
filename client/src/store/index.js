@@ -1,10 +1,13 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import io from 'socket.io-client';
+const socket = io('http://localhost:3000');
 
 Vue.use(Vuex);
 
 const defaultState = () => {
   return {
+    users: [],
     isIngame: false,
     victory: false,
     words: [],
@@ -17,11 +20,14 @@ const defaultState = () => {
 };
 
 const state = defaultState();
-const uri = 'https://afternoon-taiga-14959.herokuapp.com/getData';
+const uri = 'http://localhost:3000/getData';
 
 const store = new Vuex.Store({
   state,
   mutations: {
+    SET_USERS(state, payload) {
+      state.users = payload;
+    },
     RESET_STATE(state) {
       Object.assign(state, defaultState());
     },
@@ -48,6 +54,14 @@ const store = new Vuex.Store({
     },
   },
   actions: {
+    newPlayer({ commit }) {
+      socket.on('pemain', (users) => {
+        commit('SET_USERS', users);
+      });
+    },
+    emitUser(_, payload) {
+      socket.emit('emitUser', payload);
+    },
     resetState({ commit }) {
       commit('RESET_STATE');
     },
@@ -102,6 +116,7 @@ const store = new Vuex.Store({
           break;
         }
       }
+      socket.emit('total_score', { name : localStorage.getItem('username'), score: correct })
       commit('SET_SCORE', correct);
       commit('SET_VICTORY', true);
     },
