@@ -12,11 +12,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
-let users = []; //!ini di ini name dan score object
+let users = [];
 
 io.on('connection', (socket) => {
   console.log('an user connected');
-
   socket.on('emitUser', (user) => {
     let player = {
       name: user,
@@ -47,8 +46,10 @@ io.on('connection', (socket) => {
   });
 });
 
+
 app.use(router);
 app.use(errorHandler);
+
 
 http.listen(port, () => {
   console.log(`Server running on PORT : ${port} !!`);
