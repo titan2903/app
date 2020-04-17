@@ -4,7 +4,7 @@
 
 ### Deploy Link
 
-https://afternoon-taiga-14959.herokuapp.com/getData
+http://lomba-ketik.herokuapp.com/
 
 ### Random Words API
 
