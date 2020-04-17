@@ -1,5 +1,6 @@
 <template>
   <div>
+    {{ $store.state.users }}
     <section class="hero is-bold is-info is-fullheight">
       <div class="hero-body">
         <div class="container">
@@ -69,7 +70,7 @@ export default {
   name: 'Play',
   data() {
     return {
-      showStart: true,
+      showStart: false,
       showModal: false,
       battleDone: false,
       timer: 30,

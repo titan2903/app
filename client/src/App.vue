@@ -13,6 +13,9 @@ export default {
   components: {
     Navbar,
   },
+  created() {
+    this.$store.dispatch('newPlayer');
+  },
 };
 </script>
 
