@@ -35,7 +35,7 @@
           </div>
           <div v-else>
             <h1 class="subtitle">Waktu: {{ timer }}s</h1>
-            <b-message>
+            <b-message v-for="getWords in this.$store.state.words" :key="getWords.id"> /* loop data */
               <b>
                 {{ getWords }}
               </b>
@@ -77,13 +77,19 @@ export default {
       timer: 30,
     };
   },
-  // created(){
-  //   if('2 peserta'){
-  //     socket.emit('created', true) // kirim data ke server
-  //   }else{
-  //     // back to halaman utama
-  //   }
-  // },
+  created(){
+    if('2 peserta'){
+      socket.emit('created', true) // kirim data ke server
+      
+    }else{
+      // back to halaman utama
+    }
+  },
+  mounted(){
+    socket.on('created', data =>{
+        this.$dispatch('getAPI')
+    })
+  },
   computed: {
     getScore() {
       return this.$store.state.score;

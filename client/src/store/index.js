@@ -7,12 +7,15 @@ const store = new Vuex.Store({
   state: {
     isIngame: false,
     victory: false,
-    words: ['hello', 'my', 'name', 'is', 'padul'],
+    words: [],
     input: [],
     textModel: '',
     score: 0,
   },
   mutations: {
+    SET_GETAPI(state, payload){
+      state.words.push(payload)
+    },
     SET_INGAMESTATE(state, payload) {
       state.isIngame = payload;
     },
@@ -30,6 +33,19 @@ const store = new Vuex.Store({
     },
   },
   actions: {
+    getAPI(){
+      axios({
+        method: 'GET',
+        url: 'http://localhost/3000/getData',
+      })
+      .then(function (response) {
+        console.log(response);
+        context.commit('SET_GETAPI', response.data)
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    },
     inGameState({ commit }, bool) {
       commit('SET_INGAMESTATE', bool);
     },
