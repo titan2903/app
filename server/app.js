@@ -36,20 +36,11 @@ io.on("connection", socket => {
 
     io.emit("pemain", users);
   });
-
-  socket.on("startGame", words => {
-    io.emit("created", words);
-    socket.broadcast.emit("created", "socket broadcast");
-  });
-
-  socket.on("message", data => {
-    socket.broadcast.emit("message", data);
-  });
 });
 
 app.use(router);
 app.use(errorHandler);
 
 http.listen(port, () => {
-  console.log(`Server running on PORT : ${port} !!`);
+  console.log(`Server running on PORT : ${port}...`);
 });
