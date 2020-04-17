@@ -7,7 +7,7 @@ const defaultState = () => {
   return {
     isIngame: false,
     victory: false,
-    words: ['hello', 'my', 'name', 'is', 'padul'],
+    words: [],
     input: [],
     unameSockets: [], // mungkin nanti bisa ditaro di array ini buat username lebih (v-for di papan pembuktian?)
     textModel: '',
@@ -17,6 +17,7 @@ const defaultState = () => {
 };
 
 const state = defaultState();
+const uri = 'https://afternoon-taiga-14959.herokuapp.com/getData';
 
 const store = new Vuex.Store({
   state,
@@ -42,6 +43,9 @@ const store = new Vuex.Store({
     SET_UNAME(state, payload) {
       state.username = payload;
     },
+    SET_WORDS(state, payload) {
+      state.words = payload;
+    },
   },
   actions: {
     resetState({ commit }) {
@@ -62,6 +66,28 @@ const store = new Vuex.Store({
     addWords({ state, commit }) {
       const text = state.textModel;
       commit('SET_INPUT', text.substring(0, text.length - 1));
+    },
+    getWords({ commit }) {
+      fetch(uri, {
+        method: 'get',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          const sliced = data.words.slice(0, 15);
+
+          for (let i = sliced.length - 1; i >= 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+
+            let temp = sliced[i];
+            sliced[i] = sliced[j];
+            sliced[j] = temp;
+          }
+
+          commit('SET_WORDS', sliced);
+        });
     },
     calculateScore({ state, commit }) {
       let correct = 0;

@@ -21,6 +21,9 @@ import UsernameInput from '@/components/UsernameInput.vue';
 
 export default {
   name: 'Home',
+  created() {
+    this.$store.dispatch('getWords');
+  },
   components: {
     UsernameInput,
   },
