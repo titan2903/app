@@ -1,9 +1,11 @@
-# Lomba Ketik
+# Lomba Ketik ⌨️
 
-### Client vue disini!
+Sebuah aplikasi untuk anda yang hobi _ngetik_. 🤩
 
-Bakal dokumentasi
-Bakal branch develop
-jangan diapa-apain dulu
- 
- > Jangan lupa bikin branch baru!!!
+## Docs
+
+Lebih lanjut dapat langsung menuju folder masing-masing. 😁
+
+ - [README.md](https://github.com/lomba-ketik/app/tree/padul/client) untuk folder _**client**_.
+
+ - [README.md](https://github.com/lomba-ketik/app/tree/padul/server) untuk folder _**server**_.

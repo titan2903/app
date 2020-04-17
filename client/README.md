@@ -1,4 +1,12 @@
-# Lomba Ketik
+# Lomba Ketik ⌨️
+
+Ini adalah bagian _client_ dari aplikasi.  
+
+## Features Used
+
+  1. Vue.js
+  2. Vuex
+  3. Vue Router
 
 ## Project setup
 ```
@@ -20,7 +28,7 @@ npm run build
 npm run lint
 ```
 
-### Deploy to firebase
+### Deploy to _firebase_
 ```
 npm run deploy
 ```
