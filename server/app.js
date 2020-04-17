@@ -4,8 +4,8 @@ const Socketio = require('socket.io')(http);
 const Port = process.env.PORT || 4000
 
 Socketio.on('connection', socket =>{
-    socket.on('typing', data =>{
-
+    socket.on('created', data =>{
+        /* passing data to client */
     })
 })
 

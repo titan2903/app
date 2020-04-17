@@ -64,17 +64,26 @@
 
 <script>
 import PlayerList from '@/components/PlayerList.vue';
+import io from 'socket.io-client';
 
 export default {
   name: 'Play',
   data() {
     return {
+      socket: {},
       showStart: true,
       showModal: false,
       battleDone: false,
       timer: 30,
     };
   },
+  // created(){
+  //   if('2 peserta'){
+  //     socket.emit('created', true) // kirim data ke server
+  //   }else{
+  //     // back to halaman utama
+  //   }
+  // },
   computed: {
     getScore() {
       return this.$store.state.score;
