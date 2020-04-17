@@ -8,6 +8,14 @@ Ini adalah bagian _client_ dari aplikasi.
   2. Vuex
   3. Vue Router
 
+### Deployed link
+
+ - https://lomba-ketik.firebaseapp.com
+
+     or
+
+ - https://lomba-ketik.web.app
+
 ## Project setup
 ```
 npm install
