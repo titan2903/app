@@ -3,7 +3,7 @@ const app = express()
 const port = process.env.PORT || 3000
 const router = require('./routers')
 const errorHandler = require('./middlewares/errorHandler')
-
+const cors = require('cors')
 const http = require('http').createServer(app);
 const io = require('socket.io')(http);
 
@@ -22,12 +22,13 @@ io.on('connection', (socket) => {
   // })
 })
 
+app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 app.use(router)
 app.use(errorHandler)
 
-app.listen(port, () => {
+http.listen(port, () => {
   console.log(`Server running on PORT : ${port} !!`)
 })
