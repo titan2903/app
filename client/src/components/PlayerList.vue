@@ -15,14 +15,14 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>{{ uname }}</td>
+            <tr v-for="user in getUsers" :key="user">
+              <td>{{ user.name }}</td>
               <td>
                 <i>
                   {{ getResult ? 'Done' : 'Ongoing Battle' }}
                 </i>
               </td>
-              <td>{{ getScore }}</td>
+              <td>{{ user.score }}</td>
             </tr>
           </tbody>
         </table>
@@ -34,15 +34,10 @@
 <script>
 export default {
   name: 'PlayerList',
-  data() {
-    return {
-      uname: '',
-    };
-  },
-  created() {
-    this.getUsername();
-  },
   computed: {
+    getUsers() {
+      return this.$store.state.users;
+    },
     getScore() {
       return this.$store.state.score;
     },
@@ -51,11 +46,6 @@ export default {
     },
     getTextModel() {
       return this.$store.state.textModel;
-    },
-  },
-  methods: {
-    getUsername() {
-      this.uname = localStorage.getItem('username');
     },
   },
 };

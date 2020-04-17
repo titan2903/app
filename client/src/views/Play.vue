@@ -1,6 +1,5 @@
 <template>
   <div>
-    {{ $store.state.users }}
     <section class="hero is-bold is-info is-fullheight">
       <div class="hero-body">
         <div class="container">
@@ -70,7 +69,7 @@ export default {
   name: 'Play',
   data() {
     return {
-      showStart: false,
+      showStart: true,
       showModal: false,
       battleDone: false,
       timer: 30,
@@ -108,16 +107,25 @@ export default {
   },
   methods: {
     startTimer() {
-      this.showStart = !this.showStart;
-      let countdown = setInterval(() => {
-        this.timer--;
-        if (this.timer < 0) {
-          clearInterval(countdown);
-          this.showStart = true;
-          this.battleDone = true;
-          this.timer = 30;
-        }
-      }, 1000);
+      let usersLength = this.$store.state.users.length;
+
+      if (usersLength < 2) {
+        this.$buefy.toast.open({
+          message: 'User harus lebih dari dua!',
+          type: 'is-danger',
+        });
+      } else {
+        this.showStart = !this.showStart;
+        let countdown = setInterval(() => {
+          this.timer--;
+          if (this.timer < 0) {
+            clearInterval(countdown);
+            this.showStart = true;
+            this.battleDone = true;
+            this.timer = 30;
+          }
+        }, 1000);
+      }
     },
     contestCorrections() {
       this.$store.dispatch('addWords');

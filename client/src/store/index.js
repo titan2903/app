@@ -116,7 +116,7 @@ const store = new Vuex.Store({
           break;
         }
       }
-      socket.emit('total_score', { name : localStorage.getItem('username'), score: correct })
+      socket.emit('total_score', { name: localStorage.getItem('username'), score: correct });
       commit('SET_SCORE', correct);
       commit('SET_VICTORY', true);
     },
