@@ -1,3 +1,9 @@
 # Lomba Ketik
 
-Client vue disini!
+### Client vue disini!
+
+Bakal dokumentasi
+Bakal branch develop
+jangan diapa-apain dulu
+ 
+ > Jangan lupa bikin branch baru!!!
